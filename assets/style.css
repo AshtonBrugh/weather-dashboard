@@ -1,21 +1,27 @@
-
-.header {
-    display: flex;
-    justify-content: center;
-    background-color: rgb(0, 162, 255);
-    margin-bottom: 4rem;
-    
+body {
+    background-image: url("../assets/images/pexels-photo-912110.webp");
+    background-size: 100%;
 }
 
-header h1 {
-    color: rgb(247, 246, 244);
-    padding-top: 2rem;
-    padding-left: 2rem;
-}
 
 .btn {
     margin-top: .5rem;
     background-color: rgb(0, 162, 255);
     color: white;
+}
+
+#city-search-term {
+    display: flex;
+}
+
+#weather-container {
+    background-color: white;
+}
+
+.container {
+    margin-top: 5rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+
 }
 
