@@ -36,11 +36,16 @@ var currentWeather = function(city) {
 };
 
 
+; 
 var displayWeather = function(weather) {
   console.log(weather);
   var {name} = weather;
   document.querySelector("#name").textContent = name;
   var {temp} = weather.main;
+
+  var todayDate = moment().format('MMM DD,YYYY');
+  console.log(todayDate);
+  document.querySelector(".today-date").textContent = todayDate;
 
   var imageIcon = weather.weather[0].icon;
   console.log(imageIcon);
@@ -51,6 +56,7 @@ var displayWeather = function(weather) {
   document.querySelector("#temp").textContent = "Temp: " + temp + " °F";
   var {speed} = weather.wind;
   document.querySelector("#wind").textContent = "Wind Speed: " + speed + " MPH";
+
   var {humidity} = weather.main;
   document.querySelector("#humidity").textContent = "Humidity: " + humidity + "%";
 };
@@ -63,6 +69,10 @@ var foreCast = function(lat, lon){
     console.log(data)
    
     for (i = 0; i < 5; i++){
+
+      var forecastDate = moment().add([i] + 86400, 'seconds').format('MMM DD,YYYY');
+      console.log(forecastDate);
+
       var weatherImage = document.createElement("img");
       var iconNumber = data.daily[i].weather[0].icon;
       weatherImage.setAttribute("src", "http://openweathermap.org/img/wn/" +iconNumber + "@2x.png");
@@ -82,4 +92,6 @@ var foreCast = function(lat, lon){
     }
   })
 }
+
+
 
