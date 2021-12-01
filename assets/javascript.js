@@ -38,17 +38,14 @@ var currentWeather = function(city) {
 
 ; 
 var displayWeather = function(weather) {
-  console.log(weather);
   var {name} = weather;
   document.querySelector("#name").textContent = name;
   var {temp} = weather.main;
-
-  var todayDate = moment().format('MMM DD,YYYY');
-  console.log(todayDate);
+ 
+  var todayDate = moment().format('MMMM DD YYYY');
   document.querySelector(".today-date").textContent = todayDate;
 
   var imageIcon = weather.weather[0].icon;
-  console.log(imageIcon);
   var displayImage = document.createElement("img");
   displayImage.setAttribute("src", "http://openweathermap.org/img/wn/" + imageIcon + "@2x.png");
   document.querySelector(".current-img").appendChild(displayImage);
@@ -69,26 +66,35 @@ var foreCast = function(lat, lon){
     console.log(data)
    
     for (i = 0; i < 5; i++){
+     
+      var cardContainer = document.createElement("div");
+      var cardBody = document.createElement("div");
+      cardBody.setAttribute("class", "bg-dark p-3 border");
 
-      var forecastDate = moment().add([i] + 86400, 'seconds').format('MMM DD,YYYY');
-      console.log(forecastDate);
+      var cityDate = document.createElement("div");
+      cityDate.textContent = moment().add((i+ 1), 'day').format("MMM DD YYYY");
+   
 
       var weatherImage = document.createElement("img");
       var iconNumber = data.daily[i].weather[0].icon;
       weatherImage.setAttribute("src", "http://openweathermap.org/img/wn/" +iconNumber + "@2x.png");
-      document.querySelector(".container-forecast").appendChild(weatherImage);
+   
      
       var tempElement = document.createElement("div");
-      tempElement.textContent = "Temp: " + data.daily[i].temp.day
-      document.querySelector(".container-forecast").appendChild(tempElement);
+      tempElement.textContent = "Temp: " + data.daily[i].temp.day + "°F"
+      
 
       var windSpeed = document.createElement("div");
-      windSpeed.textContent = "Wind Speed: " + data.daily[i].wind_speed;
-      document.querySelector(".container-forecast").appendChild(windSpeed);
+      windSpeed.textContent = "Wind Speed: " + data.daily[i].wind_speed + "MPH";
+  
 
       var humidityF = document.createElement("div");
-      humidityF.textContent = "Humidity: " + data.daily[i].humidity;
-      document.querySelector(".container-forecast").appendChild(humidityF);
+      humidityF.textContent = "Humidity: " + data.daily[i].humidity + "%";
+    
+
+      cardBody.append(cityDate, weatherImage, tempElement, windSpeed, humidityF);
+      cardContainer.append(cardBody);
+      document.querySelector(".cardContainer").append(cardContainer);
     }
   })
 }
