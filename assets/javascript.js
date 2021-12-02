@@ -22,6 +22,7 @@ if(cityInput) {
 
 userFormEl.addEventListener("submit", formSubmitHandler);
 
+
 var currentWeather = function(city) {
   var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
 
@@ -33,10 +34,22 @@ var currentWeather = function(city) {
     });
 
   });
+
+
+
+ localStorage.setItem("search", JSON.stringify(city));
+ var city = JSON.parse(localStorage.getItem("search"));
+
+  var searchedCities = document.getElementById("searched-cities");
+var searchButtons = document.createElement("a");
+
+searchButtons.textContent = city;
+searchButtons.setAttribute("class", "btn");
+searchButtons.setAttribute("data-city", city);
+searchedCities.appendChild(searchButtons);
+
 };
 
-
-; 
 var displayWeather = function(weather) {
   var {name} = weather;
   document.querySelector("#name").textContent = name;
@@ -46,6 +59,9 @@ var displayWeather = function(weather) {
   document.querySelector(".today-date").textContent = todayDate;
 
   var imageIcon = weather.weather[0].icon;
+  var clearImage = document.getElementById("current-img");
+  clearImage.innerHTML = '';
+  
   var displayImage = document.createElement("img");
   displayImage.setAttribute("src", "http://openweathermap.org/img/wn/" + imageIcon + "@2x.png");
   document.querySelector(".current-img").appendChild(displayImage);
@@ -59,22 +75,25 @@ var displayWeather = function(weather) {
 };
 
 var foreCast = function(lat, lon){
+
+  var clearSearch = document.getElementById("cardContainer");
+  clearSearch.innerHTML = '';
+  
   var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,minutely&appid=" + apiKey;
   fetch(apiUrl).then(function(response) {
     return response.json();
   }).then(function(data) {
-    console.log(data)
-   
+ 
     for (i = 0; i < 5; i++){
-     
+
       var cardContainer = document.createElement("div");
       var cardBody = document.createElement("div");
       cardBody.setAttribute("class", "bg-dark p-3 border");
 
       var cityDate = document.createElement("div");
       cityDate.textContent = moment().add((i+ 1), 'day').format("MMM DD YYYY");
-   
-
+     
+  
       var weatherImage = document.createElement("img");
       var iconNumber = data.daily[i].weather[0].icon;
       weatherImage.setAttribute("src", "http://openweathermap.org/img/wn/" +iconNumber + "@2x.png");
@@ -91,12 +110,17 @@ var foreCast = function(lat, lon){
       var humidityF = document.createElement("div");
       humidityF.textContent = "Humidity: " + data.daily[i].humidity + "%";
     
-
+  
       cardBody.append(cityDate, weatherImage, tempElement, windSpeed, humidityF);
       cardContainer.append(cardBody);
       document.querySelector(".cardContainer").append(cardContainer);
+
+      
+
+    
     }
   })
+
 }
 
 
