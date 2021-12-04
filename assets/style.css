@@ -1,3 +1,4 @@
+/*setting the font and background image */
 body {
     font-family: 'M PLUS 1 Code', sans-serif;
     background-image: url("../assets/images/pexels.jpg");
@@ -12,7 +13,7 @@ body {
 
 }
 
-
+/*styling the button */
 .btn {
     margin-top: .5rem;
     background-color: rgb(184, 198, 206);
@@ -38,6 +39,7 @@ body {
     align-items: center;
 }
 
+/*styling the forecast */
 .cardContainer {
     display: flex;
     flex-wrap: wrap;
@@ -58,6 +60,7 @@ body {
     margin-top: 5rem;
 }
 
+/*styling searches*/
 .recentButton {
     color: rgb(238, 221, 71);
     text-decoration: none;
@@ -84,6 +87,7 @@ body {
    margin-top: 5rem;
 }
 
+/*stlying uv inex*/
 #uvSpan {
     padding: 0.5rem;
     border-radius: 4px;

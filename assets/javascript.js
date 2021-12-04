@@ -22,7 +22,7 @@ if(cityInput) {
 
 userFormEl.addEventListener("submit", formSubmitHandler);
 
-
+//display current weather for searched city
 var currentWeather = function(city) {
   console.log(city);
   var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
@@ -37,10 +37,9 @@ var currentWeather = function(city) {
 
   });
 
-
+//saving searched city to local storage
 var citySearch = JSON.parse(localStorage.getItem("search"));
   if (citySearch && citySearch.includes(city) === false){
-    console.log(citySearch.includes(city))
     citySearch.push(city);
     createButton(city);
   } else if (!citySearch)
@@ -62,10 +61,11 @@ var citySearch = JSON.parse(localStorage.getItem("search"));
       };
 };
 
+//dynamically creating a "a" element to be clicked on and ran through the functions
 function createButton(cityName) {
   var searchedCities = document.getElementById("searched-cities");
   var searchButtons = document.createElement("a");
-  console.log(cityName);
+ 
   searchButtons.textContent = cityName;
   searchButtons.setAttribute("class", "recentButton");
   searchButtons.setAttribute("data-city", cityName);
@@ -78,7 +78,7 @@ function createButton(cityName) {
 }
 
 
-
+//displaying current weather
 var displayWeather = function(weather) {
   var {name} = weather;
   document.querySelector("#name").textContent = name;
@@ -103,6 +103,7 @@ var displayWeather = function(weather) {
   document.querySelector("#humidity").textContent = "Humidity: " + humidity + "%";
 };
 
+//displaying UVI 
 function UVI (uv) {
   document.querySelector("#uv").innerHTML = "UVI: <span id='uvSpan'> " + uv + "</span>";
     if (uv <= 2.99) {
@@ -118,12 +119,13 @@ function UVI (uv) {
 }
 
 
-
+//displaying five day forecast
 var foreCast = function(lat, lon){
 
   var clearSearch = document.getElementById("cardContainer");
   clearSearch.innerHTML = '';
 
+  //calling the API for a second time  through lat & lon to get the forecast
   var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,minutely&appid=" + apiKey;
   fetch(apiUrl).then(function(response) {
     return response.json();
@@ -166,7 +168,7 @@ var foreCast = function(lat, lon){
 
 
     }
-
+    //getting the current UVI through this API call
     UVI(data.current.uvi);
   })
 
