@@ -10,12 +10,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Staatliches&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 
 <main>
     <div class="d-flex flex-row">
-    <div class="container col-3">
+    <div class="container-search col-3">
     <h2 class="text-warning">Search for a City:</h2>  
     <form id="user-form">
     <input id="city" class="form-control" type="text" placeholder="Raleigh" aria-label="default input example">
@@ -45,12 +48,14 @@
 </div>
 
 <div class="container">
+    <div class="recent">
     <h2 class="text-white fs-5">Recent Searches:</h2>
     <div id="searched-cities" class="searched-cities">
-        
+        </div>
     </div>
 </div>
 
+<p id="fiveDay"></p>
 <div class="container d-flex flex-row">
     <div id="cardContainer" class="cardContainer">
 
