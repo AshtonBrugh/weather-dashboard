@@ -5,6 +5,13 @@ body {
 
 }
 
+.header {
+    color: white;
+    margin: 2rem;
+    text-align: center;
+
+}
+
 
 .btn {
     margin-top: .5rem;

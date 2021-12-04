@@ -105,8 +105,14 @@ var displayWeather = function(weather) {
 
 function UVI (uv) {
   document.querySelector("#uv").innerHTML = "UVI: <span id='uvSpan'> " + uv + "</span>";
-    if (uv > 2) {
+    if (uv <= 2.99) {
       document.querySelector("#uvSpan").setAttribute("class", "bg-success");
+    }
+    if (uv >=3 && uv <=6) {
+      document.querySelector("#uvSpan").setAttribute("class", "bg-warning");
+    }
+    if (uv >=6.01 && uv <=12) {
+      document.querySelector("#uvSpan").setAttribute("class", "bg-danger");
     }
 
 }
